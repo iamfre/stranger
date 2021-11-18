@@ -9,3 +9,5 @@ Route::get('/travel/', [PagesController::class, 'travel'])->name('travel');
 Route::get('/lifestyle/', [PagesController::class, 'lifestyle'])->name('lifestyle');
 Route::get('/about/', [PagesController::class, 'about'])->name('about');
 Route::get('/contact/', [PagesController::class, 'contact'])->name('contact');
+
+Route::get('/articles/{article:slug}', [PagesController::class, 'contact'])->name('detail');

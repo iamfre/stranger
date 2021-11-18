@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
     function homepage()
     {
-        return view('pages.homepage');
+        $articles = Article::where('is_published', 1)->latest('published_at')->get();
+        return view('pages.homepage', compact('articles'));
     }
 
     function travel()
