@@ -15,9 +15,10 @@ class ArticleFactory extends Factory
     {
         return [
             'slug' => $this->faker->unique()->uuid(),
-            'title' => $this->faker->realText(35),
-            'description' => $this->faker->realText(35),
+            'title' => $this->faker->country(),
+            'description' => $this->faker->realText(180),
             'body' => $this->faker->realText(400),
+            'image' => null,
             'published_at' => $this->faker->dateTimeThisMonth(),
         ];
     }
