@@ -2,10 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ArticleFactory extends Factory
 {
+    protected $model = Article::class;
     /**
      * Define the model's default state.
      *
@@ -15,6 +17,7 @@ class ArticleFactory extends Factory
     {
         return [
             'slug' => $this->faker->unique()->uuid(),
+            'category_id' => rand(1,2),
             'title' => $this->faker->country(),
             'description' => $this->faker->realText(180),
             'body' => $this->faker->realText(400),

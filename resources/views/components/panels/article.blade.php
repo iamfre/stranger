@@ -16,7 +16,7 @@
                         <div class="meta-wrap">
                             <p class="meta">
                                 <span><i class="icon-calendar mr-2"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
-                                <span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>
+                                <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-2"></i>{{ $article->category->name }}</a></span>
                                 <span><i class="icon-comment2 mr-2"></i>5 сообщений</span>
                             </p>
                         </div>
@@ -38,7 +38,7 @@
                 <div class="meta-wrap">
                     <p class="meta">
                         <span><i class="icon-calendar mr-2"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
-                        <span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>
+                        <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-2"></i>{{ $article->category->name }}</a></span>
                         <span><i class="icon-comment2 mr-2"></i>5 сообщений</span>
                     </p>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="meta-wrap">
                     <p class="meta">
                         <span><i class="icon-calendar mr-2"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
-                        <span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>
+                        <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-2"></i>{{ $article->category->name }}</a></span>
                         <span><i class="icon-comment2 mr-2"></i>5 сообщений</span>
                     </p>
                 </div>
