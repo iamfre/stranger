@@ -3,25 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
+use App\Models\Message;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
     function homepage()
     {
-        $articles = Article::where('is_published', 1)->latest('published_at')->get();
+        $articles= Article::with('messages')->withCount('messages')->get();
         return view('pages.homepage', compact('articles'));
     }
 
     function travel()
     {
-        $articles = Article::where('is_published', 1)->latest('published_at')->get();
+        $articles = Article::where('category_id', 1)->latest('published_at')->get();
         return view('pages.homepage', compact('articles'));
     }
 
     function lifestyle()
     {
-        $articles = Article::where('is_published', 1)->latest('published_at')->get();
+        $articles = Article::where('category_id', 2)->latest('published_at')->get();
         return view('pages.homepage', compact('articles'));
     }
 

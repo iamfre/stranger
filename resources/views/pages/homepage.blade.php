@@ -8,7 +8,7 @@
             <div class="row no-gutters">
 
                 @for ($i = 0; $i < count($articles); $i++)
-                    <x-panels.article :article="$articles[$i]" :count="$i + 1" :last="count($articles)"/>
+                    <x-panels.article :article="$articles[$i]" :count="$i + 1" :last="count($articles)" />
                     @if (($i + 1) % 3 === 2)
                         </div>
                         </div>

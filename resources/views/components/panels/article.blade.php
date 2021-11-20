@@ -1,4 +1,4 @@
-@props(['article', 'count', 'last'])
+@props(['article', 'count', 'last',])
 
 @if($count % 3 === 1)
     {{--1 статья--}}
@@ -15,9 +15,9 @@
                         </h3>
                         <div class="meta-wrap">
                             <p class="meta">
-                                <span><i class="icon-calendar mr-2"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
-                                <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-2"></i>{{ $article->category->name }}</a></span>
-                                <span><i class="icon-comment2 mr-2"></i>5 сообщений</span>
+                                <span><i class="icon-calendar mr-1"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
+                                <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-1"></i>{{ $article->category->name }}</a></span>
+                                <span><i class="icon-comment2 mr-1"></i><x-panels.countMsgOfArticle :msg="$article->messages_count" /></span>
                             </p>
                         </div>
                         <p class="mb-4">{{ $article->description }}</p>
@@ -37,9 +37,9 @@
                 </h3>
                 <div class="meta-wrap">
                     <p class="meta">
-                        <span><i class="icon-calendar mr-2"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
-                        <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-2"></i>{{ $article->category->name }}</a></span>
-                        <span><i class="icon-comment2 mr-2"></i>5 сообщений</span>
+                        <span><i class="icon-calendar mr-1"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
+                        <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-1"></i>{{ $article->category->name }}</a></span>
+                        <span><i class="icon-comment2 mr-1"></i><x-panels.countMsgOfArticle :msg="$article->messages_count" /></span>
                     </p>
                 </div>
                 <p class="mb-4">{{ $article->description }}</p>
@@ -57,9 +57,9 @@
                 <h3 class="mb-2"><a href="single.html">{{ $article->title }}</a></h3>
                 <div class="meta-wrap">
                     <p class="meta">
-                        <span><i class="icon-calendar mr-2"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
-                        <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-2"></i>{{ $article->category->name }}</a></span>
-                        <span><i class="icon-comment2 mr-2"></i>5 сообщений</span>
+                        <span><i class="icon-calendar mr-1"></i>{{ $article->published_at->translatedFormat('d M Y') }}</span>
+                        <span><a href="{{ route($article->category->route) }}"><i class="icon-folder-o mr-1"></i>{{ $article->category->name }}</a></span>
+                        <span><i class="icon-comment2 mr-1"></i><x-panels.countMsgOfArticle :msg="$article->messages_count" /></span>
                     </p>
                 </div>
                 <p class="mb-4">{{ $article->description }}</p>
