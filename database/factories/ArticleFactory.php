@@ -16,7 +16,7 @@ class ArticleFactory extends Factory
             'category_id' => rand(1,2),
             'title' => $this->faker->country(),
             'description' => $this->faker->realText(180),
-            'body' => $this->faker->realText(400),
+            'body' => $this->faker->realText(1500),
             'image' => null,
             'published_at' => $this->faker->dateTimeThisMonth(),
         ];
