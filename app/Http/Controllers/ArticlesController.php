@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Message;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -51,6 +52,8 @@ class ArticlesController extends Controller
      */
     public function show(Article $article)
     {
+        $comments = Message::where('article_id', '=', "$article->id")->latest('updated_at')->get();
+
         $popularArticles = Article::with('messages')->withCount('messages')->latest('messages_count')->limit(3)->get();
 
         $archiveArticles = Article::selectRaw('month(published_at) month, count(id) articles_count')
@@ -59,7 +62,7 @@ class ArticlesController extends Controller
             ->limit(3)
             ->get();
 
-        return view('pages.articleDetail', compact('article', 'popularArticles', 'archiveArticles'));
+        return view('pages.articleDetail', compact('article', 'popularArticles', 'archiveArticles', 'comments'));
     }
 
     /**

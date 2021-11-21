@@ -37,108 +37,24 @@
                         </div>
 
                         <div class="pt-5 mt-5">
-                            <h3 class="mb-5 font-weight-bold">6 Comments</h3>
+                            <h3 class="mb-5 font-weight-bold">
+                                <x-panels.countMsgOfArticle :msg="$comments->count()"/>
+                            </h3>
                             <ul class="comment-list">
-                                <li class="comment">
-                                    <div class="vcard bio">
-                                        <img src="{{ asset('/assets/images/person_1.jpg') }}" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                        <h3>John Doe</h3>
-                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem
-                                            laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe
-                                            enim sapiente iste iure! Quam voluptas earum impedit necessitatibus,
-                                            nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                    </div>
-                                </li>
-
-                                <li class="comment">
-                                    <div class="vcard bio">
-                                        <img src="{{ asset('/assets/images/person_1.jpg') }}" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                        <h3>John Doe</h3>
-                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem
-                                            laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe
-                                            enim sapiente iste iure! Quam voluptas earum impedit necessitatibus,
-                                            nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                    </div>
-
-                                    <ul class="children">
-                                        <li class="comment">
-                                            <div class="vcard bio">
-                                                <img src="{{ asset('/assets/images/person_1.jpg') }}"
-                                                     alt="Image placeholder">
-                                            </div>
-                                            <div class="comment-body">
-                                                <h3>John Doe</h3>
-                                                <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
-                                                    quidem laborum necessitatibus, ipsam impedit vitae autem, eum
-                                                    officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum
-                                                    impedit necessitatibus, nihil?</p>
-                                                <p><a href="#" class="reply">Reply</a></p>
-                                            </div>
-
-
-                                            <ul class="children">
-                                                <li class="comment">
-                                                    <div class="vcard bio">
-                                                        <img src="{{ asset('/assets/images/person_1.jpg') }}"
-                                                             alt="Image placeholder">
-                                                    </div>
-                                                    <div class="comment-body">
-                                                        <h3>John Doe</h3>
-                                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                                                            autem, eum officia, fugiat saepe enim sapiente iste iure!
-                                                            Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                                        <p><a href="#" class="reply">Reply</a></p>
-                                                    </div>
-
-                                                    <ul class="children">
-                                                        <li class="comment">
-                                                            <div class="vcard bio">
-                                                                <img src="{{ asset('/assets/images/person_1.jpg') }}"
-                                                                     alt="Image placeholder">
-                                                            </div>
-                                                            <div class="comment-body">
-                                                                <h3>John Doe</h3>
-                                                                <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                                    elit. Pariatur quidem laborum necessitatibus, ipsam
-                                                                    impedit vitae autem, eum officia, fugiat saepe enim
-                                                                    sapiente iste iure! Quam voluptas earum impedit
-                                                                    necessitatibus, nihil?</p>
-                                                                <p><a href="#" class="reply">Reply</a></p>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="comment">
-                                    <div class="vcard bio">
-                                        <img src="{{ asset('/assets/images/person_1.jpg') }}" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                        <h3>John Doe</h3>
-                                        <div class="meta">October 03, 2018 at 2:21pm</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem
-                                            laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe
-                                            enim sapiente iste iure! Quam voluptas earum impedit necessitatibus,
-                                            nihil?</p>
-                                        <p><a href="#" class="reply">Reply</a></p>
-                                    </div>
-                                </li>
+                                @foreach($comments as $comment)
+                                    <li class="comment">
+                                        <div class="vcard bio">
+                                            <img src="{{ asset('/assets/images/person_1.jpg') }}"
+                                                 alt="Image placeholder">
+                                        </div>
+                                        <div class="comment-body">
+                                            <h3>{{ $comment->author }}</h3>
+                                            <div class="meta">{{ $comment->updated_at->format('d.m.Y H:i') }}</div>
+                                            <p>{{ $comment->body }}</p>
+                                            <p><a href="#" class="reply">Ответить</a></p>
+                                        </div>
+                                    </li>
+                                @endforeach
                             </ul>
                             <!-- END comment-list -->
 
@@ -156,7 +72,7 @@
 
                                     <div class="form-group">
                                         <label for="message">Сообщение</label>
-                                        <textarea name="" id="message" cols="30" rows="8"
+                                        <textarea name="" id="message" cols="100%" rows="10"
                                                   class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
@@ -191,23 +107,7 @@
                     <div class="sidebar-box ftco-animate">
                         <h3 class="sidebar-heading">Популярные статьи</h3>
                         @foreach($popularArticles as $article)
-                            <div class="block-21 mb-4 d-flex">
-                                <a href="{{ route('article.show', $article) }}" class="blog-img mr-4"
-                                   style="background-image: url({{ $article->image }});"></a>
-                                <div class="text">
-                                    <h3 class="heading"><a
-                                            href="{{ route('article.show', $article) }}">{{ $article->title }}</a></h3>
-                                    <div class="meta">
-                                        <div><p><span
-                                                    class="icon-calendar"></span> {{ $article->published_at->translatedFormat('d/m/y') }}
-                                            </p></div>
-                                        <div><a href="#author"><span class="icon-person"></span> Рональд Толкиен</a>
-                                        </div>
-                                        <div><a href="{{ route('article.show', $article) }}"><span
-                                                    class="icon-chat"></span> {{ $article->messages_count }}</a></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <x-panels.popularArticle :article="$article"/>
                         @endforeach
                     </div>
 
@@ -249,7 +149,6 @@
                             @endforeach
                         </ul>
                     </div>
-
 
                     <div class="sidebar-box ftco-animate">
                         <h3 class="sidebar-heading">Цитата</h3>
