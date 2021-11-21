@@ -3,7 +3,6 @@
 @section('title', "$article->title")
 
 @section('content')
-{{--    {{ dd($popularArticles) }}--}}
     <section class="ftco-section ftco-no-pt ftco-no-pb">
         <div class="container px-0">
             <div class="row d-flex no-gutters">
@@ -36,7 +35,6 @@
                                     обратно», «Властелин колец».</p>
                             </div>
                         </div>
-
 
                         <div class="pt-5 mt-5">
                             <h3 class="mb-5 font-weight-bold">6 Comments</h3>
@@ -194,14 +192,19 @@
                         <h3 class="sidebar-heading">Популярные статьи</h3>
                         @foreach($popularArticles as $article)
                             <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4"
+                                <a href="{{ route('article.show', $article) }}" class="blog-img mr-4"
                                    style="background-image: url({{ $article->image }});"></a>
                                 <div class="text">
-                                    <h3 class="heading"><a href="#">{{ $article->title }}</a></h3>
+                                    <h3 class="heading"><a
+                                            href="{{ route('article.show', $article) }}">{{ $article->title }}</a></h3>
                                     <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> {{ $article->published_at->translatedFormat('d/m/y') }}</a></div>
-                                        <div><a href="#"><span class="icon-person"></span> Рональд Толкиен</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> {{ $article->messages_count }}</a></div>
+                                        <div><p><span
+                                                    class="icon-calendar"></span> {{ $article->published_at->translatedFormat('d/m/y') }}
+                                            </p></div>
+                                        <div><a href="#author"><span class="icon-person"></span> Рональд Толкиен</a>
+                                        </div>
+                                        <div><a href="{{ route('article.show', $article) }}"><span
+                                                    class="icon-chat"></span> {{ $article->messages_count }}</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -239,12 +242,11 @@
                     <div class="sidebar-box ftco-animate">
                         <h3 class="sidebar-heading">Архив</h3>
                         <ul class="categories">
-                            <li><a href="#">Октябрь 2021 <span>(10)</span></a></li>
-                            <li><a href="#">Сентябрь 2021 <span>(6)</span></a></li>
-                            <li><a href="#">Август 2021 <span>(8)</span></a></li>
-                            <li><a href="#">Июль 2021 <span>(2)</span></a></li>
-                            <li><a href="#">Июнь 2021 <span>(7)</span></a></li>
-                            <li><a href="#">Май 2021 <span>(5)</span></a></li>
+                            @foreach($archiveArticles as $value)
+                                <li>
+                                    <a href="#">{{ \Carbon\Carbon::now()->month($value->month)->day(1)->translatedFormat("F") }}
+                                        <span>({{ $value->articles_count }})</span></a></li>
+                            @endforeach
                         </ul>
                     </div>
 

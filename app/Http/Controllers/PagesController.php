@@ -10,7 +10,7 @@ class PagesController extends Controller
 {
     function homepage()
     {
-        $articles= Article::with('messages')->withCount('messages')->get();
+        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->get();
         return view('pages.homepage', compact('articles'));
     }
 

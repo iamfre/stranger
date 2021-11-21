@@ -18,7 +18,7 @@ class ArticleFactory extends Factory
             'description' => $this->faker->realText(180),
             'body' => $this->faker->realText(1500),
             'image' => null,
-            'published_at' => $this->faker->dateTimeThisMonth(),
+            'published_at' => $this->faker->dateTimeBetween('-6 months'),
         ];
     }
 }

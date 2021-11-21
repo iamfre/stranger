@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
@@ -51,7 +52,14 @@ class ArticlesController extends Controller
     public function show(Article $article)
     {
         $popularArticles = Article::with('messages')->withCount('messages')->latest('messages_count')->limit(3)->get();
-        return view('pages.articleDetail', compact('article', 'popularArticles'));
+
+        $archiveArticles = Article::selectRaw('month(published_at) month, count(id) articles_count')
+            ->groupBy('month')
+            ->latest('month')
+            ->limit(3)
+            ->get();
+
+        return view('pages.articleDetail', compact('article', 'popularArticles', 'archiveArticles'));
     }
 
     /**
