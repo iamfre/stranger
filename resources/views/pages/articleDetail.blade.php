@@ -96,11 +96,9 @@
                     <div class="sidebar-box ftco-animate">
                         <h3 class="sidebar-heading">Категории</h3>
                         <ul class="categories">
-                            <li><a href="#">Мода <span>(6)</span></a></li>
-                            <li><a href="#">Технологии <span>(8)</span></a></li>
-                            <li><a href="#">Путешествия <span>(2)</span></a></li>
-                            <li><a href="#">Образ жизни <span>(2)</span></a></li>
-                            <li><a href="#">Фотографии <span>(7)</span></a></li>
+                            @foreach($categories as $category)
+                                <li><a href="{{ route('category.show', $category) }}">{{ $category->name }} <span>({{ $category->articles->count() }})</span></a></li>
+                            @endforeach
                         </ul>
                     </div>
 

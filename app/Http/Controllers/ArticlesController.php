@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Message;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
@@ -21,6 +21,12 @@ class ArticlesController extends Controller
     public function index()
     {
         //
+    }
+
+    function categoryShow($id)
+    {
+        $articles = Article::where('category_id', $id)->get();
+        return view('pages.homepage', compact( 'articles'));
     }
 
     /**
@@ -62,7 +68,9 @@ class ArticlesController extends Controller
             ->limit(3)
             ->get();
 
-        return view('pages.articleDetail', compact('article', 'popularArticles', 'archiveArticles', 'comments'));
+        $categories = Category::all();
+
+        return view('pages.articleDetail', compact('article', 'popularArticles', 'archiveArticles', 'comments', 'categories'));
     }
 
     /**

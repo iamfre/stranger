@@ -14,8 +14,8 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-//        Category::factory(3)->create();
         Category::factory()->create(['name' => 'Путешествия', 'route' => 'travel']);
         Category::factory()->create(['name' => 'Образ жизни', 'route' => 'lifestyle']);
+        Category::factory()->create(['name' => 'Горы', 'route' => 'mountains']);
     }
 }

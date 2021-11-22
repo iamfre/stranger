@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Message;
-use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {

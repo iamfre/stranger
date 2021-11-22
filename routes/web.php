@@ -11,3 +11,5 @@ Route::get('/about', [PagesController::class, 'about'])->name('about');
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
 Route::get('/articles/{article:slug}', [ArticlesController::class, 'show'])->name('article.show');
+
+Route::get('/category/{id}', [ArticlesController::class, 'categoryShow'])->name('category.show');
