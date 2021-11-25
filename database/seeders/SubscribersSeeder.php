@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Message;
+use App\Models\Subscriber;
 use Illuminate\Database\Seeder;
 
-class MessagesTableSeeder extends Seeder
+class SubscribersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,7 @@ class MessagesTableSeeder extends Seeder
      */
     public function run()
     {
-        Message::factory(50)->create();
+        Subscriber::factory(10)->create();
+        Subscriber::factory(2)->create(['is_active' => false]);
     }
 }

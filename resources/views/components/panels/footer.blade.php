@@ -1,10 +1,12 @@
 <div class="colorlib-footer">
     <div class="mb-4">
         <h3>Подписаться на новости</h3>
-        <form action="#" class="colorlib-subscribe-form">
+        <form action="{{ route('subscribe.create') }}" method="POST" class="colorlib-subscribe-form">
+            @csrf
+
             <div class="form-group d-flex">
-                <div class="icon"><span class="icon-paper-plane"></span></div>
-                <input type="text" class="form-control" placeholder="Ваш Email адрес">
+                <input type="text" name="email" class="form-control" placeholder="Ваш Email адрес">
+                <button type="submit" class="icon" style="background: none; border: none;"><span class="icon-paper-plane"></span></button>
             </div>
         </form>
     </div>

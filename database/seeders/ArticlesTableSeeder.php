@@ -16,7 +16,7 @@ class ArticlesTableSeeder extends Seeder
     {
 //        Article::factory(10)->create(['is_published' => 1,]);
         for ($i = 1; $i < 10; $i++) {
-            Article::factory()->create(['image' => 'assets/images/image_' . $i . '.jpg',]);
+            Article::factory()->create(['image' => '/assets/images/image_' . $i . '.jpg',]);
         }
     }
 }
