@@ -15,6 +15,7 @@ class MessageFactory extends Factory
             'article_id' => rand(1, 8),
             'body' => $this->faker->realText(100),
             'author' => $this->faker->name(),
+            'updated_at' => $this->faker->dateTimeThisMonth(),
         ];
     }
 }
