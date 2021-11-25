@@ -11,6 +11,8 @@ class Message extends Model
 
     protected $dates = ['published_at', 'created_at', 'updated_at'];
 
+    protected $guarded = [];
+
     public function articles()
     {
         return $this->belongsTo(Article::class);

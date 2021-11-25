@@ -60,19 +60,21 @@
 
                             <div class="comment-form-wrap pt-5">
                                 <h3 class="mb-5">Оставить комментарий</h3>
-                                <form action="#" class="p-3 p-md-4 bg-light">
+                                <form action="{{ route('comment.create') }}" method="POST" class="p-3 p-md-4 bg-light">
+                                    @csrf
+
                                     <div class="form-group">
-                                        <label for="name">Имя *</label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email *</label>
-                                        <input type="email" class="form-control" id="email">
+                                        <label for="author">Имя *</label>
+                                        <input type="text" id="author" class="form-control" name="author">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="message">Сообщение</label>
-                                        <textarea name="" id="message" cols="100%" rows="10"
+                                        <input type="hidden" name="article_id" class="form-control" id="article_id" value="{{ $article->id }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="body">Сообщение</label>
+                                        <textarea name="body" id="body" cols="100%" rows="10"
                                                   class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">

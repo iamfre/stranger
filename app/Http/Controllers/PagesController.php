@@ -14,25 +14,25 @@ class PagesController extends Controller
 
     function travel()
     {
-        $articles = Article::where('category_id', 1)->latest('published_at')->get();
+        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('category_id', 1)->get();
         return view('pages.homepage', compact('articles'));
     }
 
     function lifestyle()
     {
-        $articles = Article::where('category_id', 2)->latest('published_at')->get();
+        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('category_id', 2)->get();
         return view('pages.homepage', compact('articles'));
     }
 
     function about()
     {
-        $articles = Article::where('is_published', 1)->latest('published_at')->get();
+        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('is_published', 1)->get();
         return view('pages.homepage', compact('articles'));
     }
 
     function contact()
     {
-        $articles = Article::where('is_published', 1)->latest('published_at')->get();
+        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('is_published', 1)->get();
         return view('pages.homepage', compact('articles'));
     }
 }
