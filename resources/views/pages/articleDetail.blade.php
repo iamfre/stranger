@@ -101,10 +101,10 @@
                 </div>
                 <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                     <div class="sidebar-box pt-md-4">
-                        <form action="#" class="search-form">
+                        <form action="{{ route('article.search') }}" method="GET" class="search-form">
                             <div class="form-group">
-                                <span class="icon icon-search"></span>
-                                <input type="text" class="form-control" placeholder="Поиск">
+                                <input type="text" name="search" class="form-control" placeholder="Поиск">
+                                <button type="submit" class="icon icon-search" style="border: none; background: none;"></button>
                             </div>
                         </form>
                     </div>

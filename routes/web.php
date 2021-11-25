@@ -14,6 +14,8 @@ Route::post('/add-comment', [CommentController::class, 'store'])->name('comment.
 
 Route::post('/subscribe', [SubscribeController::class, 'store'])->name('subscribe.create');
 
+Route::get('/search', [SearchController::class, 'search'])->name('article.search');
+
 Route::get('/articles/{article:slug}', [ArticlesController::class, 'show'])->name('article.show');
 
 Route::get('/category/{id}', [ArticlesController::class, 'categoryShow'])->name('category.show');
