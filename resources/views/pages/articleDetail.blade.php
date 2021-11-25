@@ -131,9 +131,11 @@
                         <h3 class="mb-4 sidebar-heading">Новостная рассылка</h3>
                         <p class="mb-4">Получай полезные советы о том как путешествовать и оставайся в курсе
                             событий!</p>
-                        <form action="#" class="subscribe-form">
+                        <form action="{{ route('subscribe.create') }}" method="POST" class="subscribe-form">
+                            @csrf
+
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Ваш email адрес">
+                                <input type="text" name="email" class="form-control" placeholder="Ваш email адрес">
                                 <input type="submit" value="Подписаться" class="mt-2 btn btn-white submit">
                             </div>
                         </form>
