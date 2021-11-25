@@ -15,5 +15,6 @@ class SubscribersSeeder extends Seeder
     public function run()
     {
         Subscriber::factory(10)->create();
+        Subscriber::factory(2)->create(['is_active' => false]);
     }
 }

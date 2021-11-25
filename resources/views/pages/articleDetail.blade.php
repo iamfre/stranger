@@ -57,7 +57,6 @@
                                 @endforeach
                             </ul>
                             <!-- END comment-list -->
-
                             <div class="comment-form-wrap pt-5">
                                 <h3 class="mb-5">Оставить комментарий</h3>
                                 <form action="{{ route('comment.create') }}" method="POST" class="p-3 p-md-4 bg-light">
@@ -65,6 +64,13 @@
 
                                     <div class="form-group">
                                         <label for="author">Имя *</label>
+                                        @if($errors->has('author'))
+                                            <div class="alert-danger form-control-sm">
+                                                <ul>
+                                                    <li>{{ $errors->first('author', ':message') }}</li>
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <input type="text" id="author" class="form-control" name="author">
                                     </div>
 
@@ -74,6 +80,13 @@
 
                                     <div class="form-group">
                                         <label for="body">Сообщение</label>
+                                        @if($errors->has('body'))
+                                            <div class="alert-danger form-control-sm">
+                                                <ul>
+                                                    <li>{{ $errors->first('body', ':message') }}</li>
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <textarea name="body" id="body" cols="100%" rows="10"
                                                   class="form-control"></textarea>
                                     </div>

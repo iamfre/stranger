@@ -38,7 +38,8 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        Message::create($request->all());
+        $data = $request->validated();
+        Message::create($data);
 
         return redirect()->back()->with('success', 'Комментарий добавлен');
     }
