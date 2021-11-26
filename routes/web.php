@@ -12,6 +12,8 @@ Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
 Route::post('/add-comment', [CommentController::class, 'store'])->name('comment.create');
 
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.create');
+
 Route::post('/subscribe', [SubscribeController::class, 'store'])->name('subscribe.create');
 
 Route::get('/search', [SearchController::class, 'search'])->name('article.search');
