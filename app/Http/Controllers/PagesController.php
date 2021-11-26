@@ -26,8 +26,7 @@ class PagesController extends Controller
 
     function about()
     {
-        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('is_published', 1)->get();
-        return view('pages.homepage', compact('articles'));
+        return view('pages.about');
     }
 
     function contact()
