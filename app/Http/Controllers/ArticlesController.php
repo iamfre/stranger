@@ -25,8 +25,8 @@ class ArticlesController extends Controller
 
     function categoryShow($id)
     {
-        $articles = Article::where('category_id', $id)->get();
-        return view('pages.homepage', compact( 'articles'));
+        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('category_id', $id)->get();
+        return view('pages.homepage', compact('articles'));
     }
 
     /**
