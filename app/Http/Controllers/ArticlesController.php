@@ -10,6 +10,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
 {
@@ -25,7 +27,7 @@ class ArticlesController extends Controller
 
     function categoryShow($id)
     {
-        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('category_id', $id)->get();
+        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('category_id', $id)->where('is_published','=',true)->get();
         return view('pages.homepage', compact('articles'));
     }
 
@@ -36,18 +38,36 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.articleCreate');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $validateFields = $request->validate([
+            'category_id' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'body' => 'required',
+            'image' => 'required',
+            'slug' => 'required',
+        ]);
+        $validateFields['published_at'] = Carbon::now();
+        $article = Article::create($validateFields);
+
+        if ($article){
+            return redirect()->route('homepage');
+        }
+
+        return redirect()->route('article.create')->withErrors([
+            'formError' => 'Произошла ошибка при создании статьи'
+        ]);
+
     }
 
     /**
@@ -60,7 +80,7 @@ class ArticlesController extends Controller
     {
         $comments = Message::where('article_id', '=', "$article->id")->latest('updated_at')->get();
 
-        $popularArticles = Article::with('messages')->withCount('messages')->latest('messages_count')->limit(3)->get();
+        $popularArticles = Article::with('messages')->withCount('messages')->latest('messages_count')->where('is_published','=',true)->limit(3)->get();
 
         $archiveArticles = Article::selectRaw('month(published_at) month, count(id) articles_count')
             ->groupBy('month')
