@@ -11,6 +11,8 @@ class Article extends Model
 
     protected $dates = ['published_at', 'created_at', 'updated_at'];
 
+    protected $guarded = [];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
