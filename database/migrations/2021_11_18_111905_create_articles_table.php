@@ -22,7 +22,7 @@ class CreateArticlesTable extends Migration
             $table->text('body');
             $table->string('image')->nullable();
             $table->dateTime('published_at')->nullable();
-            $table->boolean('is_published')->default(true);
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }

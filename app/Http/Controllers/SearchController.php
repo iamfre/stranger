@@ -15,7 +15,7 @@ class SearchController extends Controller
             'title',
             'LIKE',
             '%' . $search_text . '%'
-        )->get();
+        )->where('is_published', '=', true)->get();
 
         return view('pages.search', compact('articles'));
     }
