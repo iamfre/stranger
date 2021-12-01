@@ -75,7 +75,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="hidden" name="article_id" class="form-control" id="article_id" value="{{ $article->id }}">
+                                        <input type="hidden" name="article_id" class="form-control" id="article_id"
+                                               value="{{ $article->id }}">
                                     </div>
 
                                     <div class="form-group">
@@ -101,10 +102,11 @@
                 </div>
                 <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                     <div class="sidebar-box pt-md-4">
-                        <form action="{{ route('article.search') }}" method="GET" class="search-form">
+                        <form action="{{ route('articles.search') }}" method="GET" class="search-form">
                             <div class="form-group">
                                 <input type="text" name="search" class="form-control" placeholder="Поиск">
-                                <button type="submit" class="icon icon-search" style="border: none; background: none;"></button>
+                                <button type="submit" class="icon icon-search"
+                                        style="border: none; background: none;"></button>
                             </div>
                         </form>
                     </div>
@@ -112,7 +114,8 @@
                         <h3 class="sidebar-heading">Категории</h3>
                         <ul class="categories">
                             @foreach($categories as $category)
-                                <li><a href="{{ route('category.show', $category) }}">{{ $category->name }} <span>({{ $category->articles->count() }})</span></a></li>
+                                <li><a href="{{ route('category.show', $category) }}">{{ $category->name }} <span>({{ $category->articles->where('is_published', true)->count() }})</span></a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -139,7 +142,7 @@
                     </div>
 
                     <div class="sidebar-box subs-wrap img px-4 py-5"
-                         style="background-image: url({{asset('/assets/images/bg_1.jpg')}});">
+                         style="background-image: url({{asset('assets/images/bg_1.jpg')}});">
                         <div class="overlay"></div>
                         <h3 class="mb-4 sidebar-heading">Новостная рассылка</h3>
                         <p class="mb-4">Получай полезные советы о том как путешествовать и оставайся в курсе
@@ -159,7 +162,7 @@
                         <ul class="categories">
                             @foreach($archiveArticles as $value)
                                 <li>
-                                    <a href="#">{{ \Carbon\Carbon::now()->month($value->month)->day(1)->translatedFormat("F") }}
+                                    <a href="#">{{ now()->month($value->month)->day(1)->translatedFormat("F") }}
                                         <span>({{ $value->articles_count }})</span></a></li>
                             @endforeach
                         </ul>

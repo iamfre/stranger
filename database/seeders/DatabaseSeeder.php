@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,5 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ArticlesTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
         $this->call(SubscribersSeeder::class);
+
+        User::factory(5)->create();
+        User::factory()->create(['name' => 'admin', 'email' => 'admin@ya.ru', 'password' => 'pass']);
     }
 }
