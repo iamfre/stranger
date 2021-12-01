@@ -11,7 +11,7 @@
                         <h1 class="mb-3">{{$article->title}}</h1>
                         <p>{{ $article->description }}</p>
                         <p>
-                            <img src="{{$article->image}}" alt="" class="img-fluid">
+                            <img src="{{asset($article->image)}}" alt="" class="img-fluid">
                         </p>
                         <p>{{$article->body}}</p>
                         <div class="tag-widget post-tag-container mb-5 mt-5">
@@ -25,7 +25,7 @@
 
                         <div class="about-author d-flex p-4 bg-light">
                             <div class="bio mr-5">
-                                <img src="{{ asset('/assets/images/tolkien.jpg') }}" alt="Image placeholder"
+                                <img src="{{asset('assets/images/tolkien.jpg')}}" alt="Image placeholder"
                                      class="img-fluid mb-4">
                             </div>
                             <div class="desc">
@@ -44,7 +44,7 @@
                                 @foreach($comments as $comment)
                                     <li class="comment">
                                         <div class="vcard bio">
-                                            <img src="{{ asset('/assets/images/person_1.jpg') }}"
+                                            <img src="{{asset('/assets/images/person_1.jpg')}}"
                                                  alt="Image placeholder">
                                         </div>
                                         <div class="comment-body">

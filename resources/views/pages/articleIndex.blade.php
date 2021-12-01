@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    {{--TODO: change SEARCH for DB request--}}
     <div class="p-2 btn-group-sm">
         <a href="{{ route('articles.index') }}"
            class="@if(!isset($_GET['filter'])) btn btn-primary @else btn btn-outline-primary @endif">Все</a>
@@ -24,7 +25,7 @@
                     <h5 class="card-title">{{ $article->title }}</h5>
                     <p class="card-text"
                        style=" -webkit-line-clamp: 4;display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;">{{ $article->description }}</p>
-                    <img src="{{ asset($article->image) }}" class="card-img-top" width="250px" height="250px"
+                    <img src="{{asset($article->image)}}" class="card-img-top" width="250px" height="250px"
                          style="object-fit: cover;" alt="...">
 
                 </div>
@@ -51,7 +52,9 @@
                     <form method="POST" class="btn-group-sm mr-2" action="{{ route('articles.publish', $article) }}">
                         @csrf
                         @method('PATCH')
-                        <button type="submit" class="btn @if($article->is_published) btn-secondary @else btn-success @endif">@if($article->is_published) снять @else опубликовать @endif</button>
+                        <button type="submit"
+                                class="btn @if($article->is_published) btn-secondary @else btn-success @endif">@if($article->is_published)
+                                снять @else опубликовать @endif</button>
                     </form>
                 </div>
             </div>

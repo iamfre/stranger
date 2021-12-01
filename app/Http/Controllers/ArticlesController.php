@@ -132,8 +132,9 @@ class ArticlesController extends Controller
             'is_published' => 'nullable',
         ]);
 
-        if ($validateFields['is_published']) {
-            $validateFields['published_at'] = Carbon::now();
+        if (!isset($request['is_published'])) {
+            $validateFields['is_published'] = false;
+            $validateFields['published_at'] = null;
         }
 
         $article->update($validateFields);
