@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{--TODO: change SEARCH for DB request--}}
     <div class="p-2 btn-group-sm">
         <a href="{{ route('articles.index') }}"
            class="@if(!isset($_GET['filter'])) btn btn-primary @else btn btn-outline-primary @endif">Все</a>
@@ -41,19 +40,19 @@
                         Update: @if($article->updated_at) {{ $article->updated_at->format('d.m.Y H:m:s') }} @endif</li>
                     <li class="list-group-item">Is published: @if($article->is_published) YES @else NO @endif</li>
                 </ul>
-                <div class="card-body btn-group p-2">
-                    <form method="POST" class="btn-group-sm mr-2" action="{{ route('articles.destroy', $article) }}">
+                <div class="card-body form-inline">
+                    <form method="POST" class="btn-group-sm mr-2 mb-2" action="{{ route('articles.destroy', $article) }}">
                         @csrf
                         @method('DELETE')
                         <a type="button" href="{{ route('articles.edit', $article) }}"
                            class="btn btn-warning mr-1">изменить</a>
                         <button type="submit" class="btn btn-danger">удалить</button>
                     </form>
-                    <form method="POST" class="btn-group-sm mr-2" action="{{ route('articles.publish', $article) }}">
+                    <form method="POST" class="btn-group-sm" action="{{ route('articles.publish', $article) }}">
                         @csrf
                         @method('PATCH')
                         <button type="submit"
-                                class="btn @if($article->is_published) btn-secondary @else btn-success @endif">@if($article->is_published)
+                                class="mb-2 btn @if($article->is_published) btn-secondary @else btn-success @endif">@if($article->is_published)
                                 снять @else опубликовать @endif</button>
                     </form>
                 </div>
