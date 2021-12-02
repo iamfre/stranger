@@ -14,9 +14,11 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-//        Article::factory(10)->create(['is_published' => 1,]);
+        Article::factory()->create(['is_published' => false, 'image' => 'assets/images/image_5.jpg', 'published_at' => null, 'updated_at' => null]);
+        Article::factory()->create(['is_published' => false, 'image' => 'assets/images/image_6.jpg', 'published_at' => null, 'updated_at' => null]);
+
         for ($i = 1; $i < 10; $i++) {
-            Article::factory()->create(['image' => '/assets/images/image_' . $i . '.jpg', 'is_published' => true]);
+            Article::factory()->create(['image' => 'assets/images/image_' . $i . '.jpg', 'is_published' => true]);
         }
     }
 }

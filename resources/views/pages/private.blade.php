@@ -7,12 +7,10 @@
             <h2>Привет, <span style="font-weight: 600; color: royalblue">{{ $userName }}</span></h2>
         </div>
 
-        <div>
-            <a class="" href="/article/create">Добавить статью</a>
-        </div>
-
-        <div>
-            <a href="{{ route('user.logout') }}">Выйти</a>
+        <div class="btn-group-vertical">
+            <a class="btn btn-success" href="{{ route('articles.index') }}">Статьи</a>
+            <a class="btn btn-warning" href="{{ route('articles.create') }}">Добавить статью</a>
+            <a class="btn btn-danger" href="{{ route('user.logout') }}">Выйти</a>
         </div>
 
     </div>
