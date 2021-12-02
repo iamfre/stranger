@@ -11,7 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
+
 
 class ArticlesController extends Controller
 {
@@ -22,29 +22,25 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    function categoryShow($id)
-    {
-        $articles= Article::with('messages')->latest('published_at')->withCount('messages')->where('category_id', $id)->where('is_published','=',true)->get();
-        return view('pages.homepage', compact('articles'));
+        $articles = Article::all();
+        return view('pages.articleIndex', compact('articles'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        return view('pages.articleCreate');
+        $categories = Category::all();
+        return view('pages.articleCreate', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -53,15 +49,23 @@ class ArticlesController extends Controller
             'category_id' => 'required',
             'title' => 'required',
             'description' => 'required',
+            'slug' => 'required',
             'body' => 'required',
             'image' => 'required',
-            'slug' => 'required',
+            'created_at' => 'nullable',
+            'updated_at' => 'nullable',
+            'published_at' => 'nullable',
+            'is_published' => 'nullable',
         ]);
-        $validateFields['published_at'] = Carbon::now();
+
+        if (isset($request->is_published)) {
+            $validateFields['published_at'] = Carbon::now();
+        }
+
         $article = Article::create($validateFields);
 
-        if ($article){
-            return redirect()->route('homepage');
+        if ($article) {
+            return redirect()->route('articles.index');
         }
 
         return redirect()->route('article.create')->withErrors([
@@ -80,7 +84,7 @@ class ArticlesController extends Controller
     {
         $comments = Message::where('article_id', '=', "$article->id")->latest('updated_at')->get();
 
-        $popularArticles = Article::with('messages')->withCount('messages')->latest('messages_count')->where('is_published','=',true)->limit(3)->get();
+        $popularArticles = Article::with('messages')->withCount('messages')->latest('messages_count')->where('is_published', '=', true)->limit(3)->get();
 
         $archiveArticles = Article::selectRaw('month(published_at) month, count(id) articles_count')
             ->groupBy('month')
@@ -96,34 +100,86 @@ class ArticlesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param int $id
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        $categories = Category::all();
+        return view('pages.articleCreate', compact('article', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+
+        $validateFields = $request->validate([
+            'category_id' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'slug' => 'required',
+            'body' => 'required',
+            'image' => 'required',
+            'created_at' => 'nullable',
+            'updated_at' => 'nullable',
+            'published_at' => 'nullable',
+            'is_published' => 'nullable',
+        ]);
+
+        if (!isset($request['is_published'])) {
+            $validateFields['is_published'] = false;
+            $validateFields['published_at'] = null;
+        }
+
+        $article->update($validateFields);
+        return redirect()->route('articles.index')->withSuccess("Статья: $article->title - обновлена!");
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('articles.index')->withDanger("Статья: $article->title - удалена!");
     }
+
+    public function categoryShow($id)
+    {
+        $articles = Article::with('messages')->latest('published_at')->withCount('messages')->where('category_id', $id)->where('is_published', '=', true)->get();
+        return view('pages.homepage', compact('articles'));
+    }
+
+    public function publish($id)
+    {
+        $article = Article::where('id', $id)->first();
+
+        if ($article->is_published) {
+            $article->is_published = false;
+            $article->published_at = null;
+        } else {
+            $article->is_published = true;
+            $article->published_at = Carbon::now();
+        }
+
+        $article->update();
+
+        if ($article->is_published) {
+            $changeMsg = '" опубликована!';
+        } else {
+            $changeMsg = '" снята с публикации!';
+        }
+        return redirect()->route('articles.index')->withSuccess('Статья: "' . $article->title . $changeMsg);
+    }
+
 }

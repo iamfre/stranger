@@ -11,11 +11,12 @@ class SearchController extends Controller
     {
         $search_text = $_GET['search'];
 
-        $articles = Article::where(
-            'title',
-            'LIKE',
-            '%' . $search_text . '%'
-        )->where('is_published', '=', true)->get();
+        $articles = Article::with('messages')
+            ->latest('published_at')
+            ->withCount('messages')
+            ->where('title', 'LIKE', '%' . $search_text . '%')
+            ->where('is_published', true)
+            ->get();
 
         return view('pages.search', compact('articles'));
     }
